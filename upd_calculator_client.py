@@ -1,15 +1,29 @@
-import udp_input_handling as uih
-import calculator_socket_code as csc
-import sys
+import shared.input_handling as ih
+import UDP.calculator_socket_code as csc
 import socket
 
 def cleanup(s: socket.socket):
+    """
+    Cleanup the program
+    
+    Parameters:
+    s (socket.socket): The socket to close
+    """
     print("Closing the connection")
     # close socket
     s.close()
     print("Exiting the program")
 
 def loop(host: str, port: int, s: socket.socket):
+    """
+    The main loop of the program
+    
+    Parameters:
+    host (str): The host
+    port (int): The port
+    s (socket.socket): The socket
+    """
+
     try:
         while True:
             # get the input from the user
@@ -25,7 +39,7 @@ def loop(host: str, port: int, s: socket.socket):
                 print("Socket error")
                 continue
             # display the result to the user
-            print("Result: " + result.decode("ascii", "ignore"))
+            print("Result: " + result.decode("ascii", "ignore") + '\n')
     # catch the keyboard interrupt exception
     except KeyboardInterrupt:
         print("\nKeyboard interrupt Received\n")
@@ -35,7 +49,10 @@ def loop(host: str, port: int, s: socket.socket):
 
 # setup
 def setup():
-    host, port = uih.get_host_port()
+    """
+    Setup the program
+    """
+    host, port = ih.get_host_port()
     s = csc.create_socket()
     loop(host, port, s)
 

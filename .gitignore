@@ -1,3 +1,5 @@
 CMP109SocketServer.exe
 CMP109SocketServer.zip
 __pycache__/*
+*/__pycache__/*
+test file.txt

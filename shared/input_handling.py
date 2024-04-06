@@ -1,7 +1,16 @@
 import re
 
 # verify the port number
-def verify_port(port):
+def verify_port(port: str) -> bool:
+    """
+    Verify the port number
+
+    Parameters:
+    port (str): The port number to verify
+
+    Returns:
+    bool: True if the port number is valid, False otherwise
+    """
     # check if the port number is a number
     try:
         port = int(port)
@@ -19,7 +28,16 @@ def verify_port(port):
     return True
 
 # verify the selected host
-def verify_host(host):
+def verify_host(host: str) -> bool:
+    """
+    Verify the host
+    
+    Parameters:
+    host (str): The host to verify
+    
+    Returns:
+    bool: True if the host is valid, False otherwise
+    """
     # check if the host matches the IP address pattern
     if not re.match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", host):
         print("Invalid host\n")
@@ -44,7 +62,13 @@ def verify_host(host):
     # return True if the host is valid
     return True
 
-def get_host_port():
+def get_host_port() -> tuple[str, int]:
+    """
+    Get the host and port from the user
+
+    Returns:
+    tuple[str, int]: The host and port
+    """
     while True:
         host = input("Enter the host: ")
         if verify_host(host):
@@ -54,3 +78,23 @@ def get_host_port():
         if verify_port(port):
             break
     return host, int(port)
+
+# verify the selected file
+def verify_file(file_name: str) -> bool:
+    """
+    Verify the file
+    
+    Parameters:
+    file_name (str): The file to verify
+    
+    Returns:
+    bool: True if the file is valid, False otherwise
+    """
+    try:
+        # open the file
+        f = open(file_name, "r")
+        f.close()
+    except FileNotFoundError:
+        print("File not found")
+        return False
+    return True
